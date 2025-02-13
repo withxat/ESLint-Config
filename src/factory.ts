@@ -212,6 +212,16 @@ export function xat(
 			...userConfigs as any,
 		)
 
+	if (isInEditor()) {
+		composer = composer
+			.disableRulesFix([
+				"unused-imports/no-unused-imports",
+				"prefer-const",
+			], {
+				builtinRules: () => import(["eslint", "use-at-your-own-risk"].join("/")).then(r => r.builtinRules),
+			})
+	}
+
 	return composer
 }
 

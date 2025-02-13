@@ -103,6 +103,7 @@ export async function typescript(
 				"@typescript-eslint/consistent-type-definitions": ["error", "interface"],
 				"@typescript-eslint/consistent-type-imports": ["error", {
 					disallowTypeAnnotations: false,
+					fixStyle: "separate-type-imports",
 					prefer: "type-imports",
 				}],
 				"@typescript-eslint/method-signature-style": ["error", "property"], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful

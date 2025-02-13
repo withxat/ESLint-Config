@@ -14,6 +14,7 @@ export async function imports(options: OptionsStylistic = {}): Promise<TypedFlat
 				"import-x": pluginImport,
 			},
 			rules: {
+				"import-x/consistent-type-specifier-style": ["error", "prefer-top-level"],
 				"import-x/first": "error",
 				"import-x/no-duplicates": "error",
 				"import-x/no-mutable-exports": "error",
