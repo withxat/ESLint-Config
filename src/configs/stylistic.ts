@@ -16,7 +16,6 @@ export async function stylistic(
 	}
 
 	const config = pluginStylistic.configs.customize({
-		flat: true,
 		indent,
 		jsx,
 		quotes,
@@ -31,6 +30,16 @@ export async function stylistic(
 			},
 			rules: {
 				...config.rules,
+
+				"@stylistic/generator-star-spacing": ["error", {
+					after: true,
+					before: false,
+				}],
+				"@stylistic/yield-star-spacing": ["error", {
+					after: true,
+					before: false,
+				}],
+
 				...overrides,
 			},
 		},
