@@ -20,7 +20,7 @@ import {
 	sortPackageJson,
 	sortTsconfig,
 	stylistic,
-	tailwindcss,
+	// tailwindcss,
 	toml,
 	typescript,
 	unicorn,
@@ -58,7 +58,7 @@ export function xat(
 		jsx: enableJsx = true,
 		react: enableReact = isPackageExists("react"),
 		regexp: enableRegexp = true,
-		tailwindcss: enableTailwindCSS = isPackageExists("tailwindcss"),
+		// tailwindcss: enableTailwindCSS = isPackageExists("tailwindcss"),
 		toml: enableToml = true,
 		typescript: enableTypeScript = isPackageExists("typescript"),
 		unicorn: enableUnicorn = true,
@@ -143,11 +143,11 @@ export function xat(
 		}))
 	}
 
-	if (enableTailwindCSS) {
-		configs.push(tailwindcss({
-			overrides: getOverrides(options, "tailwindcss"),
-		}))
-	}
+	// if (enableTailwindCSS) {
+	// 	configs.push(tailwindcss({
+	// 		overrides: getOverrides(options, "tailwindcss"),
+	// 	}))
+	// }
 
 	if (enableRegexp) {
 		configs.push(regexp(typeof enableRegexp === "boolean" ? {} : enableRegexp))

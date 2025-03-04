@@ -170,13 +170,13 @@ export interface OptionsConfig extends OptionsComponentExtensions, OptionsProjec
 	 */
 	stylistic?: boolean | (StylisticConfig & OptionsOverrides)
 
-	/**
-	 * Enable Tailwind CSS rules.
-	 *
-	 * @see https://github.com/francoismassart/eslint-plugin-tailwindcss
-	 * @default auto-detect based on the dependencies
-	 */
-	tailwindcss?: boolean | OptionsOverrides
+	// /**
+	//  * Enable Tailwind CSS rules.
+	//  *
+	//  * @see https://github.com/francoismassart/eslint-plugin-tailwindcss
+	//  * @default auto-detect based on the dependencies
+	//  */
+	// tailwindcss?: boolean | OptionsOverrides
 
 	/**
 	 * Enable TOML support.
