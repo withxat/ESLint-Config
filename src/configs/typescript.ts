@@ -2,6 +2,8 @@ import type { OptionsComponentExtensions, OptionsFiles, OptionsOverrides, Option
 
 import process from "node:process"
 
+import { isPackageExists } from "local-pkg"
+
 import { GLOB_TS, GLOB_TSX } from "@/constants"
 import { parserTs, pluginTs } from "@/plugins"
 
@@ -15,6 +17,15 @@ export async function typescript(
 		parserOptions = {},
 		type = "app",
 	} = options
+
+	const NestJsPackages = [
+		"@nestjs/common",
+		"@nestjs/core",
+		"@nestjs/platform-express",
+		"@nestjs/platform-fastify",
+	]
+
+	const isUsingNestJs = NestJsPackages.some(index => isPackageExists(index))
 
 	const files = options.files ?? [
 		GLOB_TS,
@@ -59,6 +70,12 @@ export async function typescript(
 				parser: parserTs,
 				parserOptions: {
 					extraFileExtensions: componentExtensions.map(extension => `.${extension}`),
+					...(isUsingNestJs
+						? {
+								emitDecoratorMetadata: true,
+								experimentalDecorators: true,
+							}
+						: {}),
 					sourceType: "module",
 					...typeAware
 						? {
