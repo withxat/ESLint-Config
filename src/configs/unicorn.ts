@@ -13,8 +13,11 @@ export async function unicorn(): Promise<TypedFlatConfigItem[]> {
 				"unicorn/consistent-empty-array-spread": "error",
 				"unicorn/error-message": "error",
 				"unicorn/escape-case": "error",
+				"unicorn/filename-case": ["error", {
+					case: "kebabCase",
+				}],
 				"unicorn/new-for-builtins": "error",
-				"unicorn/no-instanceof-array": "error",
+				"unicorn/no-instanceof-builtin": "error",
 				"unicorn/no-new-array": "error",
 				"unicorn/no-new-buffer": "error",
 				"unicorn/number-literal-case": "error",
