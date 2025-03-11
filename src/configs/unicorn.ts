@@ -17,7 +17,7 @@ export async function unicorn(): Promise<TypedFlatConfigItem[]> {
 					case: "kebabCase",
 				}],
 				"unicorn/new-for-builtins": "error",
-				"unicorn/no-instanceof-builtin": "error",
+				"unicorn/no-instanceof-builtins": "error",
 				"unicorn/no-new-array": "error",
 				"unicorn/no-new-buffer": "error",
 				"unicorn/number-literal-case": "error",
