@@ -75,43 +75,52 @@ export async function react(
 			},
 			name: "xat/react/rules",
 			rules: {
+
 				// recommended rules from @eslint-react/dom
-				"@eslint-react/dom/no-children-in-void-dom-elements": "warn",
 				"@eslint-react/dom/no-dangerously-set-innerhtml": "warn",
 				"@eslint-react/dom/no-dangerously-set-innerhtml-with-children": "error",
 				"@eslint-react/dom/no-find-dom-node": "error",
+				"@eslint-react/dom/no-flush-sync": "error",
+				"@eslint-react/dom/no-hydrate": "error",
 				"@eslint-react/dom/no-missing-button-type": "warn",
 				"@eslint-react/dom/no-missing-iframe-sandbox": "warn",
 				"@eslint-react/dom/no-namespace": "error",
+				"@eslint-react/dom/no-render": "warn",
 				"@eslint-react/dom/no-render-return-value": "error",
 				"@eslint-react/dom/no-script-url": "warn",
 				"@eslint-react/dom/no-unsafe-iframe-sandbox": "warn",
 				"@eslint-react/dom/no-unsafe-target-blank": "warn",
+				"@eslint-react/dom/no-use-form-state": "error",
+				"@eslint-react/dom/no-void-elements-with-children": "error",
+
+				// recommended rules from eslint-plugin-react-hooks-extra
+				"@eslint-react/hooks-extra/no-direct-set-state-in-use-effect": "warn",
+				"@eslint-react/hooks-extra/no-unnecessary-use-prefix": "warn",
 
 				// recommended rules from @eslint-react
-				"@eslint-react/ensure-forward-ref-using-ref": "warn",
 				"@eslint-react/no-access-state-in-setstate": "error",
 				"@eslint-react/no-array-index-key": "warn",
 				"@eslint-react/no-children-count": "warn",
-
 				"@eslint-react/no-children-for-each": "warn",
 				"@eslint-react/no-children-map": "warn",
-
 				"@eslint-react/no-children-only": "warn",
-
-				"@eslint-react/no-children-prop": "warn",
 				"@eslint-react/no-children-to-array": "warn",
 				"@eslint-react/no-clone-element": "warn",
 				"@eslint-react/no-comment-textnodes": "warn",
 				"@eslint-react/no-component-will-mount": "error",
 				"@eslint-react/no-component-will-receive-props": "error",
 				"@eslint-react/no-component-will-update": "error",
+				"@eslint-react/no-context-provider": "warn",
 				"@eslint-react/no-create-ref": "error",
+				"@eslint-react/no-default-props": "error",
 				"@eslint-react/no-direct-mutation-state": "error",
-				"@eslint-react/no-duplicate-key": "error",
-				"@eslint-react/no-implicit-key": "error",
+				"@eslint-react/no-dupjlicate-jsx-props": "warn",
+				"@eslint-react/no-duplicate-key": "warn",
+				"@eslint-react/no-forward-ref": "warn",
+				"@eslint-react/no-implicit-key": "warn",
 				"@eslint-react/no-missing-key": "error",
-				"@eslint-react/no-nested-components": "warn",
+				"@eslint-react/no-nested-component-definitions": "warn",
+				"@eslint-react/no-prop-types": "error",
 				"@eslint-react/no-redundant-should-component-update": "error",
 				"@eslint-react/no-set-state-in-component-did-mount": "warn",
 				"@eslint-react/no-set-state-in-component-did-update": "warn",
@@ -120,17 +129,19 @@ export async function react(
 				"@eslint-react/no-unsafe-component-will-mount": "warn",
 				"@eslint-react/no-unsafe-component-will-receive-props": "warn",
 				"@eslint-react/no-unsafe-component-will-update": "warn",
-				"@eslint-react/no-unstable-context-value": "error",
-				"@eslint-react/no-unstable-default-props": "error",
+				"@eslint-react/no-unstable-context-value": "warn",
+				"@eslint-react/no-unstable-default-props": "warn",
 				"@eslint-react/no-unused-class-component-members": "warn",
 				"@eslint-react/no-unused-state": "warn",
-				"@eslint-react/no-useless-fragment": "warn",
-				"@eslint-react/prefer-destructuring-assignment": "warn",
-				"@eslint-react/prefer-shorthand-boolean": "warn",
-				"@eslint-react/prefer-shorthand-fragment": "warn",
+				"@eslint-react/no-use-context": "warn",
+
+				"@eslint-react/no-useless-forward-ref": "warn",
+				"@eslint-react/use-jsx-vars": "warn",
+
 				// recommended rules react-hooks
 				"react-hooks/exhaustive-deps": "warn",
 				"react-hooks/rules-of-hooks": "error",
+
 				// react refresh
 				"react-refresh/only-export-components": [
 					"warn",

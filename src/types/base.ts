@@ -6,7 +6,7 @@ import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore"
 import type { RuleOptions } from "@/types/modules/eslint"
 
 export type Awaitable<T> = Promise<T> | T
-export type Rules = RuleOptions
+export interface Rules extends RuleOptions {}
 
 export type { ConfigNames } from "@/types/modules/eslint"
 
