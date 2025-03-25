@@ -121,6 +121,14 @@ export interface OptionsConfig extends OptionsComponentExtensions, OptionsProjec
 	gitignore?: boolean | FlatGitignoreOptions
 
 	/**
+	 * Enable HTML support.
+	 *
+	 * @see https://github.com/BenoitZugmeyer/eslint-plugin-html
+	 * @default true
+	 */
+	html?: boolean | OptionsOverrides
+
+	/**
 	 * Control to disable some rules in editors.
 	 * @default auto-detect based on the process.env
 	 */
@@ -162,14 +170,6 @@ export interface OptionsConfig extends OptionsComponentExtensions, OptionsProjec
 	 */
 	regexp?: boolean | (OptionsRegExp & OptionsOverrides)
 
-	/**
-	 * Enable stylistic rules.
-	 *
-	 * @see https://eslint.style/
-	 * @default true
-	 */
-	stylistic?: boolean | (StylisticConfig & OptionsOverrides)
-
 	// /**
 	//  * Enable Tailwind CSS rules.
 	//  *
@@ -177,6 +177,14 @@ export interface OptionsConfig extends OptionsComponentExtensions, OptionsProjec
 	//  * @default auto-detect based on the dependencies
 	//  */
 	// tailwindcss?: boolean | OptionsOverrides
+
+	/**
+	 * Enable stylistic rules.
+	 *
+	 * @see https://eslint.style/
+	 * @default true
+	 */
+	stylistic?: boolean | (StylisticConfig & OptionsOverrides)
 
 	/**
 	 * Enable TOML support.

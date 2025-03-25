@@ -7,6 +7,7 @@ import { isPackageExists } from "local-pkg"
 
 import {
 	disable,
+	html,
 	ignore,
 	imports,
 	javascript,
@@ -20,7 +21,6 @@ import {
 	sortPackageJson,
 	sortTsconfig,
 	stylistic,
-	// tailwindcss,
 	toml,
 	typescript,
 	unicorn,
@@ -54,11 +54,11 @@ export function xat(
 	const {
 		componentExts: componentExtensions = [],
 		gitignore: enableGitignore = true,
+		html: enableHtml = true,
 		jsonc: enableJsonc = true,
 		jsx: enableJsx = true,
 		react: enableReact = isPackageExists("react"),
 		regexp: enableRegexp = true,
-		// tailwindcss: enableTailwindCSS = isPackageExists("tailwindcss"),
 		toml: enableToml = true,
 		typescript: enableTypeScript = isPackageExists("typescript"),
 		unicorn: enableUnicorn = true,
@@ -121,6 +121,13 @@ export function xat(
 
 	if (enableUnicorn) {
 		configs.push(unicorn())
+	}
+
+	if (enableHtml) {
+		configs.push(html({
+			overrides: getOverrides(options, "html"),
+			stylistic: stylisticOptions,
+		}))
 	}
 
 	if (enableJsx) {
