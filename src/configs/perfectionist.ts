@@ -40,9 +40,9 @@ export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
 				'perfectionist/sort-intersection-types': ['error', { order: 'asc', type: 'line-length' }],
 				'perfectionist/sort-jsx-props': ['error', {
 					groups: [
-						'multiline',
-						'shorthand',
+						'multiline-prop',
 						'unknown',
+						'shorthand-prop',
 					],
 					order: 'asc',
 					type: 'natural',
