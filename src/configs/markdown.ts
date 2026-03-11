@@ -1,17 +1,19 @@
-import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '@/types'
+import type { OptionsComponentExts, OptionsFiles, OptionsMarkdown, TypedFlatConfigItem } from '@/types'
 
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors'
 
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from '@/globs'
-import { interopDefault, parserPlain } from '@/utils'
+import { interopDefault } from '@/utils'
 
 export async function markdown(
-	options: OptionsFiles & OptionsOverrides & OptionsComponentExts = {},
+	options: OptionsFiles & OptionsMarkdown & OptionsComponentExts = {},
 ): Promise<TypedFlatConfigItem[]> {
 	const {
 		componentExts = [],
 		files = [GLOB_MARKDOWN],
+		gfm = true,
 		overrides = {},
+		overridesMarkdown = {},
 	} = options
 
 	const markdown = await interopDefault(import('@eslint/markdown'))
@@ -37,10 +39,35 @@ export async function markdown(
 		},
 		{
 			files,
-			languageOptions: {
-				parser: parserPlain,
-			},
+			language: gfm ? 'markdown/gfm' : 'markdown/commonmark',
 			name: 'xat/markdown/parser',
+		},
+		{
+			files,
+			name: 'xat/markdown/rules',
+			rules: {
+				...markdown.configs.recommended.at(0)?.rules,
+				'markdown/fenced-code-language': 'off',
+				// https://github.com/eslint/markdown/issues/294
+				'markdown/no-missing-label-refs': 'off',
+				...overridesMarkdown,
+			},
+		},
+		{
+			files,
+			name: 'xat/markdown/disables/markdown',
+			rules: {
+				// Disable rules do not work with markdown sourcecode.
+				'command/command': 'off',
+				'no-irregular-whitespace': 'off',
+				'perfectionist/sort-exports': 'off',
+				'perfectionist/sort-imports': 'off',
+				'regexp/no-legacy-features': 'off',
+				'regexp/no-missing-g-flag': 'off',
+				'regexp/no-useless-dollar-replacements': 'off',
+				'regexp/no-useless-flag': 'off',
+				'style/indent': 'off',
+			},
 		},
 		{
 			files: [
@@ -54,9 +81,11 @@ export async function markdown(
 					},
 				},
 			},
-			name: 'xat/markdown/disables',
+			name: 'xat/markdown/disables/code',
 			rules: {
 				'antfu/no-top-level-await': 'off',
+
+				'e18e/prefer-static-regex': 'off',
 
 				'no-alert': 'off',
 				'no-console': 'off',

@@ -24,14 +24,14 @@ Let me just list the main differences:
 - Designed to work with TypeScript, JSX, JSON, YAML, Toml, Markdown, etc. Out-of-box.
 - Opinionated, but [very customizable](#customization)
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
-- Optional [React](#react), [Next.js](#nextjs), [Astro](#astro) support
-- Optional [formatters](#formatters) support for formatting CSS, HTML, XML, etc.
+- Automatically enables _React_, _Next.js_, _Astro_ support based on the dependencies.
+- Formatters support for formatting CSS, HTML, XML, etc.
 - **Style principle**: Minimal for reading, stable for diff, consistent
   - Sorted imports, dangling commas
   - Single quotes, no semi
   - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - Respects `.gitignore` by default
-- Requires ESLint v9.29.0+
+- Requires ESLint v9.10.0+ or v10.0.0+
 
 ## Usage
 

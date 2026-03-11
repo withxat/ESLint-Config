@@ -4,12 +4,14 @@ import type { RuleOptions } from '@/typegen'
 import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from '@/types'
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils'
+import { findUpSync } from 'find-up-simple'
 import { isPackageExists } from 'local-pkg'
 
 import {
 	astro,
 	comments,
 	disables,
+	e18e,
 	ignores,
 	imports,
 	javascript,
@@ -21,6 +23,7 @@ import {
 	node,
 	paths,
 	perfectionist,
+	pnpm,
 	react,
 	sortPackageJson,
 	sortTsconfig,
@@ -77,12 +80,14 @@ export function xat(
 		astro: enableAstro = isPackageExists('astro'),
 		autoRenamePlugins = true,
 		componentExts = [],
+		e18e: enableE18e = true,
 		formatters: enableFormatters = true,
 		gitignore: enableGitignore = true,
 		imports: enableImports = true,
 		jsx: enableJsx = true,
 		nextjs: enableNextjs = isPackageExists('next'),
 		paths: enablePaths = true,
+		pnpm: enableCatalogs = !!findUpSync('pnpm-workspace.yaml'),
 		react: enableReact = isPackageExists('react'),
 		regexp: enableRegexp = true,
 		typescript: enableTypeScript = isPackageExists('typescript'),
@@ -128,7 +133,7 @@ export function xat(
 
 	// Base configs
 	configs.push(
-		ignores(options.ignores),
+		ignores(options.ignores, !enableTypeScript),
 		javascript({
 			isInEditor,
 			overrides: getOverrides(options, 'javascript'),
@@ -185,6 +190,15 @@ export function xat(
 		configs.push(regexp(typeof enableRegexp === 'boolean' ? {} : enableRegexp))
 	}
 
+	if (enableE18e) {
+		configs.push(
+			e18e({
+				isInEditor,
+				...enableE18e === true ? {} : enableE18e,
+			}),
+		)
+	}
+
 	if (options.test ?? true) {
 		configs.push(test({
 			isInEditor,
@@ -233,6 +247,18 @@ export function xat(
 			overrides: getOverrides(options, 'yaml'),
 			stylistic: stylisticOptions,
 		}))
+	}
+
+	if (enableCatalogs) {
+		const optionsPnpm = resolveSubOptions(options, 'pnpm')
+		configs.push(
+			pnpm({
+				isInEditor,
+				json: options.jsonc !== false,
+				yaml: options.yaml !== false,
+				...optionsPnpm,
+			}),
+		)
 	}
 
 	if (options.toml ?? true) {

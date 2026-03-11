@@ -2,6 +2,7 @@ import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
+import type { ConfigWithExtends } from 'eslint-flat-config-utils'
 
 import type { ConfigNames, RuleOptions } from '@/typegen'
 import type { VendoredPrettierOptions } from '@/vender/prettier-types'
@@ -10,9 +11,9 @@ export type Awaitable<T> = Promise<T> | T
 
 export interface Rules extends RuleOptions {}
 
-export type { ConfigNames }
+export type { ConfigNames, RuleOptions }
 
-export type TypedFlatConfigItem = Omit<Linter.Config<Rules & Linter.RulesRecord>, 'plugins' | 'rules'> & {
+export type TypedFlatConfigItem = Omit<ConfigWithExtends, 'plugins' | 'rules'> & {
 	// Relax plugins type limitation, as most of the plugins did not have correct type info yet.
 	/**
 	 * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
@@ -115,6 +116,20 @@ export interface OptionsUnicorn extends OptionsOverrides {
 	allRecommended?: boolean
 }
 
+export interface OptionsMarkdown extends OptionsOverrides {
+	/**
+	 * Enable GFM (GitHub Flavored Markdown) support.
+	 *
+	 * @default true
+	 */
+	gfm?: boolean
+
+	/**
+	 * Override rules for markdown itself.
+	 */
+	overridesMarkdown?: TypedFlatConfigItem['rules']
+}
+
 export interface OptionsTypeScriptParserOptions {
 	/**
 	 * Glob patterns for files that should be type aware.
@@ -179,6 +194,60 @@ export interface OptionsRegExp {
 	level?: 'error' | 'warn'
 }
 
+export interface OptionsE18e extends OptionsOverrides {
+	/**
+	 * Include modernization rules
+	 *
+	 * @see https://github.com/e18e/eslint-plugin#modernization
+	 * @default true
+	 */
+	modernization?: boolean
+	/**
+	 * Include module replacements rules
+	 *
+	 * @see https://github.com/e18e/eslint-plugin#module-replacements
+	 * @default options.isInEditor
+	 */
+	moduleReplacements?: boolean
+	/**
+	 * Include performance improvements rules
+	 *
+	 * @see https://github.com/e18e/eslint-plugin#performance-improvements
+	 * @default true
+	 */
+	performanceImprovements?: boolean
+}
+
+export interface OptionsPnpm extends OptionsIsInEditor {
+	/**
+	 * Requires catalogs usage
+	 *
+	 * Detects automatically based if `catalogs` is used in the pnpm-workspace.yaml file
+	 */
+	catalogs?: boolean
+
+	/**
+	 * Enable linting for package.json, will install the jsonc parser
+	 *
+	 * @default true
+	 */
+	json?: boolean
+
+	/**
+	 * Sort entries in pnpm-workspace.yaml
+	 *
+	 * @default false
+	 */
+	sort?: boolean
+
+	/**
+	 * Enable linting for pnpm-workspace.yaml, will install the yaml parser
+	 *
+	 * @default true
+	 */
+	yaml?: boolean
+}
+
 export interface OptionsIsInEditor {
 	isInEditor?: boolean
 }
@@ -218,6 +287,13 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	autoRenamePlugins?: boolean
 
 	/**
+	 * Options for [@e18e/eslint-plugin](https://github.com/e18e/eslint-plugin)
+	 *
+	 * @default true
+	 */
+	e18e?: boolean | OptionsE18e
+
+	/**
 	 * Use external formatters to format files.
 	 *
 	 * Requires installing:
@@ -251,11 +327,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 * @default auto-detect based on the process.env
 	 */
 	isInEditor?: boolean
-
 	/**
 	 * Core rules. Can't be disabled.
 	 */
 	javascript?: OptionsOverrides
+
 	/**
 	 * Enable JSONC support.
 	 *
@@ -273,13 +349,13 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	jsx?: boolean
 
 	/**
-	 * Enable linting for **code snippets** in Markdown.
+	 * Enable linting for **code snippets** in Markdown and the markdown content itself.
 	 *
 	 * For formatting Markdown content, enable also `formatters.markdown`.
 	 *
 	 * @default true
 	 */
-	markdown?: boolean | OptionsOverrides
+	markdown?: boolean | OptionsMarkdown
 
 	/**
 	 * Enable nextjs rules.
@@ -297,6 +373,18 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 * @default true
 	 */
 	paths?: boolean
+
+	/**
+	 * Enable pnpm (workspace/catalogs) support.
+	 *
+	 * Currently it's disabled by default, as it's still experimental.
+	 * In the future it will be smartly enabled based on the project usage.
+	 *
+	 * @see https://github.com/antfu/pnpm-workspace-utils
+	 * @experimental
+	 * @default false
+	 */
+	pnpm?: boolean | OptionsPnpm
 
 	/**
 	 * Enable react rules.
