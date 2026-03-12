@@ -1,19 +1,18 @@
 import type { OptionsPnpm, TypedFlatConfigItem } from '@/types'
 
-import fs from 'node:fs/promises'
-
-import { findUp } from 'find-up-simple'
-
 import { interopDefault } from '@/utils'
 
-async function detectCatalogUsage(): Promise<boolean> {
-	const workspaceFile = await findUp('pnpm-workspace.yaml')
-	if (!workspaceFile)
-		return false
+// import fs from 'node:fs/promises'
+// import { findUp } from 'find-up-simple'
 
-	const yaml = await fs.readFile(workspaceFile, 'utf-8')
-	return yaml.includes('catalog:') || yaml.includes('catalogs:')
-}
+// async function detectCatalogUsage(): Promise<boolean> {
+// 	const workspaceFile = await findUp('pnpm-workspace.yaml')
+// 	if (!workspaceFile)
+// 		return false
+
+// 	const yaml = await fs.readFile(workspaceFile, 'utf-8')
+// 	return yaml.includes('catalog:') || yaml.includes('catalogs:')
+// }
 
 export async function pnpm(
 	options: OptionsPnpm,
@@ -29,7 +28,7 @@ export async function pnpm(
 	])
 
 	const {
-		catalogs = await detectCatalogUsage(),
+		catalogs = false,
 		isInEditor = false,
 		json = true,
 		sort = true,
