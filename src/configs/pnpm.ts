@@ -22,7 +22,6 @@ export async function pnpm(
 		yamlParser,
 	] = await Promise.all([
 		interopDefault(import('eslint-plugin-pnpm')),
-		interopDefault(import('eslint-plugin-yml')),
 		interopDefault(import('yaml-eslint-parser')),
 	])
 
@@ -63,7 +62,9 @@ export async function pnpm(
 									},
 								],
 							}
-						: {}),
+						: {
+								'pnpm/json-enforce-catalog': 'off',
+							}),
 					'pnpm/json-prefer-workspace-settings': [
 						'error',
 						{ autofix: !isInEditor },
