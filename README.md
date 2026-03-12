@@ -31,7 +31,7 @@ Let me just list the main differences:
   - Single quotes, no semi
   - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - Respects `.gitignore` by default
-- Requires ESLint v9.10.0+ or v10.0.0+
+- Requires ESLint v9.10.0+
 
 ## Usage
 

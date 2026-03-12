@@ -37,7 +37,7 @@ export async function combine(...configs: Awaitable<TypedFlatConfigItem | TypedF
  *
  * @example
  * ```ts
- * import { renameRules } from '@xats/eslint-config'
+ * import { renameRules } from '@withxat/eslint-config'
  *
  * export default [{
  *   rules: renameRules(
@@ -70,7 +70,7 @@ export function renameRules(
  *
  * @example
  * ```ts
- * import { renamePluginInConfigs } from '@xats/eslint-config'
+ * import { renamePluginInConfigs } from '@withxat/eslint-config'
  * import someConfigs from './some-configs'
  *
  * export default renamePluginInConfigs(someConfigs, {
