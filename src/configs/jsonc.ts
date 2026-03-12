@@ -22,7 +22,7 @@ export async function jsonc(
 		{
 			name: 'xat/jsonc/setup',
 			plugins: {
-				jsonc: pluginJsonc as any,
+				jsonc: pluginJsonc,
 			},
 		},
 		{

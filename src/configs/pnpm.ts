@@ -19,7 +19,6 @@ export async function pnpm(
 ): Promise<TypedFlatConfigItem[]> {
 	const [
 		pluginPnpm,
-		pluginYaml,
 		yamlParser,
 	] = await Promise.all([
 		interopDefault(import('eslint-plugin-pnpm')),
@@ -37,6 +36,13 @@ export async function pnpm(
 
 	const configs: TypedFlatConfigItem[] = []
 
+	configs.push({
+		name: 'xat/pnpm/setup',
+		plugins: {
+			pnpm: pluginPnpm,
+		},
+	})
+
 	if (json) {
 		configs.push(
 			{
@@ -45,10 +51,7 @@ export async function pnpm(
 					'**/package.json',
 				],
 				language: 'jsonc/x',
-				name: 'antfu/pnpm/package-json',
-				plugins: {
-					pnpm: pluginPnpm,
-				},
+				name: 'xat/pnpm/package-json',
 				rules: {
 					...(catalogs
 						? {
@@ -80,10 +83,7 @@ export async function pnpm(
 			languageOptions: {
 				parser: yamlParser,
 			},
-			name: 'antfu/pnpm/pnpm-workspace-yaml',
-			plugins: {
-				pnpm: pluginPnpm,
-			},
+			name: 'xat/pnpm/pnpm-workspace-yaml',
 			rules: {
 				'pnpm/yaml-enforce-settings': ['error', {
 					settings: {
@@ -102,10 +102,7 @@ export async function pnpm(
 				languageOptions: {
 					parser: yamlParser,
 				},
-				name: 'antfu/pnpm/pnpm-workspace-yaml-sort',
-				plugins: {
-					yaml: pluginYaml,
-				},
+				name: 'xat/pnpm/pnpm-workspace-yaml-sort',
 				rules: {
 					'yaml/sort-keys': [
 						'error',

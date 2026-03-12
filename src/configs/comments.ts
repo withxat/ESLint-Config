@@ -5,10 +5,13 @@ import { pluginComments } from '@/plugins'
 export async function comments(): Promise<TypedFlatConfigItem[]> {
 	return [
 		{
-			name: 'xat/eslint-comments/rules',
+			name: 'xat/eslint-comments/setup',
 			plugins: {
 				'eslint-comments': pluginComments,
 			},
+		},
+		{
+			name: 'xat/eslint-comments/rules',
 			rules: {
 				'eslint-comments/no-aggregating-enable': 'error',
 				'eslint-comments/no-duplicate-disable': 'error',

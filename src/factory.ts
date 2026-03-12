@@ -87,7 +87,7 @@ export function xat(
 		jsx: enableJsx = true,
 		nextjs: enableNextjs = isPackageExists('next'),
 		paths: enablePaths = true,
-		pnpm: enableCatalogs = !!findUpSync('pnpm-workspace.yaml'),
+		pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
 		react: enableReact = isPackageExists('react'),
 		regexp: enableRegexp = true,
 		typescript: enableTypeScript = isPackageExists('typescript'),
@@ -249,7 +249,7 @@ export function xat(
 		}))
 	}
 
-	if (enableCatalogs) {
+	if (enablePnpm) {
 		const optionsPnpm = resolveSubOptions(options, 'pnpm')
 		configs.push(
 			pnpm({

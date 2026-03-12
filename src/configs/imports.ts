@@ -10,11 +10,14 @@ export async function imports(options: OptionsOverrides & OptionsStylistic = {})
 
 	return [
 		{
-			name: 'xat/imports/rules',
+			name: 'xat/imports/setup',
 			plugins: {
 				antfu: pluginAntfu,
 				import: pluginImportLite,
 			},
+		},
+		{
+			name: 'xat/imports/rules',
 			rules: {
 				'antfu/import-dedupe': 'error',
 				'antfu/no-import-dist': 'error',

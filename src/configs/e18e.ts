@@ -18,10 +18,13 @@ export async function e18e(options: OptionsE18e & OptionsIsInEditor = {}): Promi
 
 	return [
 		{
-			name: 'antfu/e18e/rules',
+			name: 'xat/e18e/setup',
 			plugins: {
 				e18e: pluginE18e,
 			},
+		},
+		{
+			name: 'xat/e18e/rules',
 			rules: {
 				...modernization ? { ...configs.modernization.rules } : {},
 				...moduleReplacements ? { ...configs.moduleReplacements!.rules } : {},
