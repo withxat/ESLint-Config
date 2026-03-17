@@ -12,7 +12,7 @@ const require = createRequire(fileURLToPath(import.meta.url))
 
 function mergePrettierOptions(
 	options: VendoredPrettierOptions,
-	overrides: VendoredPrettierRuleOptions = {},
+	overrides: VendoredPrettierRuleOptions,
 ): VendoredPrettierRuleOptions {
 	return {
 		...options,

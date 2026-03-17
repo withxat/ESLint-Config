@@ -6,8 +6,10 @@ export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>
 
 export type VendoredPrettierRuleOptions = VendoredPrettierOptions & {
 	[k: string]: undefined | unknown
-	parser?: BuiltInParserName
+	parser: BuiltInParserName | ExternalParserName
 }
+
+export type ExternalParserName = 'astro'
 
 export interface VendoredPrettierOptionsRequired {
 	/**

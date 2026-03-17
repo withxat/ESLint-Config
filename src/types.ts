@@ -9,7 +9,7 @@ import type { VendoredPrettierOptions } from '@/vender/prettier-types'
 
 export type Awaitable<T> = Promise<T> | T
 
-export interface Rules extends RuleOptions {}
+export type Rules = RuleOptions & Record<string, Linter.RuleEntry<any> | undefined>
 
 export type { ConfigNames, RuleOptions }
 
@@ -25,7 +25,7 @@ export type TypedFlatConfigItem = Omit<ConfigWithExtends, 'plugins' | 'rules'> &
 	/**
 	 * Rules configuration. More flexible to allow plugin rules that may not be perfectly typed.
 	 */
-	rules?: Record<string, Linter.RuleEntry<any> | undefined>
+	rules?: Rules
 }
 
 export interface OptionsFiles {
@@ -206,7 +206,7 @@ export interface OptionsE18e extends OptionsOverrides {
 	 * Include module replacements rules
 	 *
 	 * @see https://github.com/e18e/eslint-plugin#module-replacements
-	 * @default options.isInEditor
+	 * @default type === 'lib' && isInEditor
 	 */
 	moduleReplacements?: boolean
 	/**

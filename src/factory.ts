@@ -51,7 +51,6 @@ const flatConfigProps = [
 export const defaultPluginRenaming = {
 	'@eslint-react': 'react',
 	'@eslint-react/dom': 'react-dom',
-	'@eslint-react/hooks-extra': 'react-hooks-extra',
 	'@eslint-react/naming-convention': 'react-naming-convention',
 
 	'@stylistic': 'style',
@@ -90,7 +89,8 @@ export function xat(
 		pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
 		react: enableReact = isPackageExists('react'),
 		regexp: enableRegexp = true,
-		typescript: enableTypeScript = isPackageExists('typescript'),
+		type: appType = 'app',
+		typescript: enableTypeScript = isPackageExists('typescript') || isPackageExists('@typescript/native-preview'),
 		unicorn: enableUnicorn = true,
 	} = options
 
@@ -175,7 +175,7 @@ export function xat(
 			...typescriptOptions,
 			componentExts,
 			overrides: getOverrides(options, 'typescript'),
-			type: options.type,
+			type: appType,
 		}))
 	}
 
