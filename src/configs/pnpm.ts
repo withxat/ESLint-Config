@@ -168,6 +168,7 @@ export async function pnpm(
 									'allowedDeprecatedVersions',
 									'allowNonAppliedPatches',
 									'configDependencies',
+									'allowBuilds',
 									'ignoredBuiltDependencies',
 									'ignoredOptionalDependencies',
 									'neverBuiltDependencies',
