@@ -1,4 +1,3 @@
-/* eslint-disable perfectionist/sort-objects */
 import type { OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '@/types'
 
 import { isPackageExists } from 'local-pkg'
@@ -22,9 +21,6 @@ const ReactRouterPackages = [
 	'@react-router/serve',
 	'@react-router/dev',
 ]
-const ReactCompilerPackages = [
-	'babel-plugin-react-compiler',
-]
 const NextJsPackages = [
 	'next',
 ]
@@ -46,17 +42,15 @@ export async function react(
 	const isTypeAware = !!tsconfigPath
 
 	const typeAwareRules: TypedFlatConfigItem['rules'] = {
-		'react/no-leaked-conditional-rendering': 'warn',
 		'react/no-implicit-key': 'error',
+		'react/no-leaked-conditional-rendering': 'warn',
 	}
 
 	const [
 		pluginReact,
-		pluginReactHooks,
 		pluginReactRefresh,
 	] = await Promise.all([
 		interopDefault(import('@eslint-react/eslint-plugin')),
-		interopDefault(import('eslint-plugin-react-hooks')),
 		interopDefault(import('eslint-plugin-react-refresh')),
 	] as const)
 
@@ -64,7 +58,6 @@ export async function react(
 	const isUsingRemix = RemixPackages.some(i => isPackageExists(i))
 	const isUsingReactRouter = ReactRouterPackages.some(i => isPackageExists(i))
 	const isUsingNext = NextJsPackages.some(i => isPackageExists(i))
-	const isUsingReactCompiler = ReactCompilerPackages.some(i => isPackageExists(i))
 	const plugins = pluginReact.configs.all.plugins!
 
 	return [
@@ -72,12 +65,7 @@ export async function react(
 			name: 'xat/react/setup',
 			plugins: {
 				'react': plugins['@eslint-react'],
-				'react-dom': plugins['@eslint-react/dom'],
-				'react-hooks': pluginReactHooks,
-				'react-naming-convention': plugins['@eslint-react/naming-convention'],
 				'react-refresh': pluginReactRefresh,
-				'react-rsc': plugins['@eslint-react/rsc'],
-				'react-web-api': plugins['@eslint-react/web-api'],
 			},
 		},
 		{
@@ -92,92 +80,7 @@ export async function react(
 			},
 			name: 'xat/react/rules',
 			rules: {
-				// recommended rules from eslint-plugin-react-x https://eslint-react.xyz/docs/rules/overview#core-rules
-				'react/component-hook-factories': 'error',
-				'react/error-boundaries': 'error',
-				'react/exhaustive-deps': 'warn',
-				'react/jsx-key-before-spread': 'warn',
-				'react/jsx-no-comment-textnodes': 'warn',
-				'react-hooks/purity': 'error',
-				'react/no-access-state-in-setstate': 'error',
-				'react/no-array-index-key': 'warn',
-				'react/no-children-count': 'warn',
-				'react/no-children-for-each': 'warn',
-				'react/no-children-map': 'warn',
-				'react/no-children-only': 'warn',
-				'react/no-children-to-array': 'warn',
-				'react/no-clone-element': 'warn',
-				'react/no-component-will-mount': 'error',
-				'react/no-component-will-receive-props': 'error',
-				'react/no-component-will-update': 'error',
-				'react/no-context-provider': 'warn',
-				'react/no-create-ref': 'error',
-				'react/no-direct-mutation-state': 'error',
-				'react/no-missing-key': 'error',
-				'react/no-nested-component-definitions': 'error',
-				'react/no-nested-lazy-component-declarations': 'error',
-				'react/no-redundant-should-component-update': 'error',
-				'react/no-set-state-in-component-did-mount': 'warn',
-				'react/no-set-state-in-component-did-update': 'warn',
-				'react/no-set-state-in-component-will-update': 'warn',
-				'react/no-unnecessary-use-prefix': 'warn',
-				'react/no-unsafe-component-will-mount': 'warn',
-				'react/no-unsafe-component-will-receive-props': 'warn',
-				'react/no-unsafe-component-will-update': 'warn',
-				'react/no-unused-class-component-members': 'warn',
-				'react/no-use-context': 'warn',
-				'react/no-forward-ref': 'warn',
-				'react/rules-of-hooks': 'error',
-				'react/set-state-in-effect': 'warn',
-				'react/set-state-in-render': 'error',
-				'react/unsupported-syntax': 'error',
-				'react/use-memo': 'error',
-				'react/use-state': 'warn',
-
-				'react/prefer-namespace-import': 'error',
-
-				// recommended rules from eslint-plugin-react-rsc https://eslint-react.xyz/docs/rules/overview#rsc-rules
-				'react-rsc/function-definition': 'error',
-
-				// recommended rules from eslint-plugin-react-dom https://eslint-react.xyz/docs/rules/overview#dom-rules
-				'react-dom/no-dangerously-set-innerhtml': 'warn',
-				'react-dom/no-dangerously-set-innerhtml-with-children': 'error',
-				'react-dom/no-find-dom-node': 'error',
-				'react-dom/no-flush-sync': 'error',
-				'react-dom/no-hydrate': 'error',
-				'react-dom/no-namespace': 'error',
-				'react-dom/no-render': 'error',
-				'react-dom/no-render-return-value': 'error',
-				'react-dom/no-script-url': 'warn',
-				'react-dom/no-unsafe-iframe-sandbox': 'warn',
-				'react-dom/no-use-form-state': 'error',
-				'react-dom/no-void-elements-with-children': 'error',
-
-				// recommended rules from eslint-plugin-react-naming-convention https://eslint-react.xyz/docs/rules/overview#naming-convention-rules
-				'react-naming-convention/context-name': 'warn',
-				'react-naming-convention/ref-name': 'warn',
-
-				// recommended rules from eslint-plugin-react-web-api https://eslint-react.xyz/docs/rules/overview#web-api-rules
-				'react-web-api/no-leaked-event-listener': 'warn',
-				'react-web-api/no-leaked-interval': 'warn',
-				'react-web-api/no-leaked-resize-observer': 'warn',
-				'react-web-api/no-leaked-timeout': 'warn',
-
-				// React Compiler rules
-				...(isUsingReactCompiler
-					? {
-							'react-hooks/config': 'error',
-							'react-hooks/gating': 'error',
-							'react-hooks/globals': 'error',
-							'react-hooks/immutability': 'error',
-							'react-hooks/preserve-manual-memoization': 'error',
-							'react-hooks/refs': 'error',
-							'react/set-state-in-effect': 'error',
-							'react/no-nested-component-definitions': 'error',
-							'react/no-nested-lazy-component-declarations': 'error',
-							'react-hooks/incompatible-library': 'warn',
-						}
-					: {}),
+				...pluginReact.configs.recommended.rules,
 
 				// preconfigured rules from eslint-plugin-react-refresh https://github.com/ArnaudBarre/eslint-plugin-react-refresh/tree/main/src
 				'react-refresh/only-export-components': [
@@ -235,12 +138,8 @@ export async function react(
 			name: 'xat/react/typescript',
 			rules: {
 				// Disables rules that are already handled by TypeScript
-				'react-dom/no-string-style-prop': 'off',
-				'react-dom/no-unknown-property': 'off',
-				'react/jsx-no-duplicate-props': 'off',
-				'react/jsx-no-undef': 'off',
-				'react/jsx-uses-react': 'off',
-				'react/jsx-uses-vars': 'off',
+				'react/dom-no-string-style-prop': 'off',
+				'react/dom-no-unknown-property': 'off',
 			},
 		},
 		...isTypeAware

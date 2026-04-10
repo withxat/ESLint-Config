@@ -275,7 +275,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 * Requires installing for formatting .astro:
 	 * - `prettier-plugin-astro`
 	 *
-	 * @default false
+	 * @default auto-detect based on the presence of a astro package.json file
 	 */
 	astro?: boolean | OptionsOverrides
 
@@ -363,7 +363,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 * Requires installing:
 	 * - `@next/eslint-plugin-next`
 	 *
-	 * @default false
+	 * @default auto-detect based on the presence of a next package.json file
 	 */
 	nextjs?: boolean | OptionsOverrides
 
@@ -377,12 +377,8 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	/**
 	 * Enable pnpm (workspace/catalogs) support.
 	 *
-	 * Currently it's disabled by default, as it's still experimental.
-	 * In the future it will be smartly enabled based on the project usage.
-	 *
 	 * @see https://github.com/antfu/pnpm-workspace-utils
-	 * @experimental
-	 * @default false
+	 * @default auto-detect based on the presence of a pnpm-workspace.yaml file
 	 */
 	pnpm?: boolean | OptionsPnpm
 
@@ -391,10 +387,9 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 *
 	 * Requires installing:
 	 * - `@eslint-react/eslint-plugin`
-	 * - `eslint-plugin-react-hooks`
 	 * - `eslint-plugin-react-refresh`
 	 *
-	 * @default false
+	 * @default auto-detect based on the presence of a react package.json file
 	 */
 	react?: boolean | OptionsOverrides
 
@@ -413,6 +408,16 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 * @default true
 	 */
 	stylistic?: boolean | (StylisticConfig & OptionsOverrides)
+
+	/**
+	 * Enable svelte rules.
+	 *
+	 * Requires installing:
+	 * - `eslint-plugin-svelte`
+	 *
+	 * @default auto-detect based on the presence of a svelte package.json file
+	 */
+	svelte?: boolean | OptionsOverrides
 
 	/**
 	 * Enable test support.

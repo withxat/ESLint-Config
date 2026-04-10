@@ -1,15 +1,11 @@
-strictPeerDependencies: false
 ignoreWorkspaceRootCheck: true
-shamefullyHoist: true
+
 shellEmulator: true
 
 trustPolicy: no-downgrade
-trustPolicyExclude:
-  - semver@6.3.1
 
 ignoredBuiltDependencies:
   - sharp
-onlyBuiltDependencies:
-  - esbuild
-  - lefthook
   - unrs-resolver
+onlyBuiltDependencies:
+  - lefthook

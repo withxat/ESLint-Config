@@ -28,6 +28,7 @@ import {
 	sortPackageJson,
 	sortTsconfig,
 	stylistic,
+	svelte,
 	test,
 	toml,
 	typescript,
@@ -50,8 +51,6 @@ const flatConfigProps = [
 
 export const defaultPluginRenaming = {
 	'@eslint-react': 'react',
-	'@eslint-react/dom': 'react-dom',
-	'@eslint-react/naming-convention': 'react-naming-convention',
 
 	'@stylistic': 'style',
 	'@typescript-eslint': 'ts',
@@ -89,6 +88,7 @@ export function xat(
 		pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
 		react: enableReact = isPackageExists('react'),
 		regexp: enableRegexp = true,
+		svelte: enableSvelte = isPackageExists('svelte'),
 		type: appType = 'app',
 		typescript: enableTypeScript = isPackageExists('typescript') || isPackageExists('@typescript/native-preview'),
 		unicorn: enableUnicorn = true,
@@ -218,6 +218,16 @@ export function xat(
 		configs.push(nextjs({
 			overrides: getOverrides(options, 'nextjs'),
 		}))
+	}
+
+	if (enableSvelte) {
+		configs.push(
+			svelte({
+				overrides: getOverrides(options, 'svelte'),
+				stylistic: stylisticOptions,
+				typescript: !!enableTypeScript,
+			}),
+		)
 	}
 
 	if (enableAstro) {

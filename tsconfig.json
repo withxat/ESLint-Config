@@ -4,9 +4,6 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"noEmit": true
-	},
-	"include": [
-		"src"
-	]
+		"types": ["node"]
+	}
 }

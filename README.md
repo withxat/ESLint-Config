@@ -13,7 +13,7 @@ Let me just list the main differences:
 1. This is an **ESM only** package.
 2. Automatically enables plugins and rules based on `package.json` dependencies. \
    This increases the package's size a bit, but it's more convenient to use.
-3. Removed support for some languages that I don't use, such as Vue, Svelte, UnoCSS, etc.
+3. Removed support for some languages that I don't use, such as Vue, UnoCSS, etc.
 4. Prefers `tab` over `space` for indentation.
 5. Removed antfu's `cli` tool.
 
