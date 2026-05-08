@@ -205,6 +205,44 @@ lspconfig.eslint.setup({
 
 </details>
 
+## Tailwind CSS
+
+When `tailwindcss` is detected in your `package.json`, support for [`eslint-plugin-better-tailwindcss`](https://github.com/schoero/eslint-plugin-better-tailwindcss) is enabled automatically.
+
+The plugin needs to know where your Tailwind setup lives so it can resolve your custom theme, plugins, and utilities. Without that, rules like `no-unknown-classes` and `enforce-canonical-classes` only work against Tailwind's default theme — which means classes from your `@theme` block (e.g. `text-muted-foreground`) appear as "unknown."
+
+### Auto-detection
+
+The config auto-detects a sensible entry point in your project root (relative to `process.cwd()`):
+
+- **Tailwind v4** — looks for a CSS file containing `@import "tailwindcss"` (or a `@tailwind` directive) at common locations:
+  `src/app/globals.css`, `src/styles/globals.css`, `src/index.css`, `app/globals.css`, `styles/globals.css`, and a few other variants.
+- **Tailwind v3** — falls back to detecting `tailwind.config.{ts,mts,cts,js,mjs,cjs}`.
+
+If detection finds a match, no further configuration is needed.
+
+### Manual override
+
+If your entry point lives somewhere unusual, pass it explicitly. User-provided settings always win over auto-detection.
+
+```js
+// eslint.config.mjs
+import { xat } from '@withxat/eslint-config'
+
+export default xat({
+  tailwindcss: {
+    settings: {
+      // Tailwind v4
+      entryPoint: 'src/styles/tailwind.css',
+      // Tailwind v3 (use this instead of entryPoint)
+      // tailwindConfig: 'tailwind.config.ts',
+    },
+  },
+})
+```
+
+The full list of supported settings is documented in the plugin's [settings reference](https://github.com/schoero/eslint-plugin-better-tailwindcss/blob/main/docs/settings/settings.md).
+
 ## Customization
 
 I haven't modified the config builder part much, so you can customize it according to the [antfu/eslint-config](https://github.com/antfu/eslint-config#Customization) documentation.
