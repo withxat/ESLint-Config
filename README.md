@@ -24,7 +24,7 @@ Let me just list the main differences:
 - Designed to work with TypeScript, JSX, JSON, YAML, Toml, Markdown, etc. Out-of-box.
 - Opinionated, but [very customizable](#customization)
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
-- Automatically enables _React_, _Next.js_, _Astro_ support based on the dependencies.
+- Automatically enables _React_, _Next.js_, _Astro_, _Tailwind CSS_ support based on the dependencies.
 - Formatters support for formatting CSS, HTML, XML, etc.
 - **Style principle**: Minimal for reading, stable for diff, consistent
   - Sorted imports, dangling commas

@@ -252,6 +252,17 @@ export interface OptionsIsInEditor {
 	isInEditor?: boolean
 }
 
+export interface OptionsTailwindCSS {
+	/**
+	 * Settings for [eslint-plugin-better-tailwindcss](https://github.com/schoero/eslint-plugin-better-tailwindcss).
+	 *
+	 * Will be passed as `settings['better-tailwindcss']` in the flat config.
+	 *
+	 * @see https://github.com/schoero/eslint-plugin-better-tailwindcss/blob/main/docs/settings/settings.md
+	 */
+	settings?: Record<string, unknown>
+}
+
 export interface OptionsUnoCSS extends OptionsOverrides {
 	/**
 	 * Enable attributify support.
@@ -418,6 +429,16 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 * @default auto-detect based on the presence of a svelte package.json file
 	 */
 	svelte?: boolean | OptionsOverrides
+
+	/**
+	 * Enable [eslint-plugin-better-tailwindcss](https://github.com/schoero/eslint-plugin-better-tailwindcss) support.
+	 *
+	 * Requires installing:
+	 * - `tailwindcss`
+	 *
+	 * @default auto-detect based on the presence of a `tailwindcss` package
+	 */
+	tailwindcss?: boolean | (OptionsOverrides & OptionsTailwindCSS)
 
 	/**
 	 * Enable test support.

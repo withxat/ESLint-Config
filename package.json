@@ -62,6 +62,7 @@
 		"eslint-merge-processors": "^2.0.0",
 		"eslint-plugin-antfu": "^3.2.2",
 		"eslint-plugin-astro": "^1.7.0",
+		"eslint-plugin-better-tailwindcss": "^4.5.0",
 		"eslint-plugin-command": "^3.5.2",
 		"eslint-plugin-format": "^2.0.1",
 		"eslint-plugin-import-lite": "^0.6.0",
@@ -101,6 +102,7 @@
 		"next": "^16.2.6",
 		"react": "^19.2.6",
 		"svelte": "^5.55.5",
+		"tailwindcss": "^4.1.17",
 		"tsdown": "^0.22.0",
 		"tsx": "^4.21.0",
 		"typescript": "^6.0.3"

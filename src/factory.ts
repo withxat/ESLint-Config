@@ -29,6 +29,7 @@ import {
 	sortTsconfig,
 	stylistic,
 	svelte,
+	tailwindcss,
 	test,
 	toml,
 	typescript,
@@ -90,6 +91,7 @@ export function xat(
 		react: enableReact = isPackageExists('react'),
 		regexp: enableRegexp = true,
 		svelte: enableSvelte = isPackageExists('svelte'),
+		tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
 		type: appType = 'app',
 		typescript: enableTypeScript = isPackageExists('typescript') || isPackageExists('@typescript/native-preview'),
 		unicorn: enableUnicorn = true,
@@ -235,6 +237,13 @@ export function xat(
 		configs.push(astro({
 			overrides: getOverrides(options, 'astro'),
 			stylistic: stylisticOptions,
+		}))
+	}
+
+	if (enableTailwindCSS) {
+		configs.push(tailwindcss({
+			...resolveSubOptions(options, 'tailwindcss'),
+			overrides: getOverrides(options, 'tailwindcss'),
 		}))
 	}
 
