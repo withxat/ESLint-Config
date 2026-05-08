@@ -1,10 +1,11 @@
 import type { TypedFlatConfigItem } from '@/types'
 
-import { GLOB_EXCLUDE, GLOB_TS, GLOB_TSX } from '@/globs'
+import { GLOB_EXCLUDE, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '@/globs'
 
 export async function ignores(
 	userIgnores: ((originals: string[]) => string[]) | string[] = [],
 	ignoreTypeScript: boolean = false,
+	ignoreMarkdown: boolean = false,
 ): Promise<TypedFlatConfigItem[]> {
 	let ignores = [
 		...GLOB_EXCLUDE,
@@ -22,6 +23,10 @@ export async function ignores(
 			...ignores,
 			...userIgnores,
 		]
+	}
+
+	if (ignoreMarkdown) {
+		ignores.push(GLOB_MARKDOWN)
 	}
 
 	return [

@@ -83,6 +83,7 @@ export function xat(
 		gitignore: enableGitignore = true,
 		imports: enableImports = true,
 		jsx: enableJsx = true,
+		markdown: enableMarkdown = true,
 		nextjs: enableNextjs = isPackageExists('next'),
 		paths: enablePaths = true,
 		pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
@@ -133,7 +134,7 @@ export function xat(
 
 	// Base configs
 	configs.push(
-		ignores(options.ignores, !enableTypeScript),
+		ignores(options.ignores, !enableTypeScript, !!enableMarkdown),
 		javascript({
 			isInEditor,
 			overrides: getOverrides(options, 'javascript'),
@@ -278,7 +279,7 @@ export function xat(
 		}))
 	}
 
-	if (options.markdown ?? true) {
+	if (enableMarkdown) {
 		configs.push(
 			markdown(
 				{
