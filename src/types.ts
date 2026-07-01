@@ -171,7 +171,7 @@ export interface OptionsStylistic {
 }
 
 export interface StylisticConfig
-	extends Pick<StylisticCustomizeOptions, 'indent' | 'jsx' | 'quotes' | 'semi'> {
+	extends Pick<StylisticCustomizeOptions, 'braceStyle' | 'indent' | 'jsx' | 'quotes' | 'semi'> {
 }
 
 export interface OptionsOverrides {
@@ -338,11 +338,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 * @default auto-detect based on the process.env
 	 */
 	isInEditor?: boolean
+
 	/**
 	 * Core rules. Can't be disabled.
 	 */
 	javascript?: OptionsOverrides
-
 	/**
 	 * Enable JSONC support.
 	 *
@@ -384,6 +384,13 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
 	 * @default true
 	 */
 	paths?: boolean
+
+	/**
+	 * Options for eslint-plugin-perfectionist.
+	 *
+	 * @default true
+	 */
+	perfectionist?: boolean | OptionsOverrides
 
 	/**
 	 * Enable pnpm (workspace/catalogs) support.

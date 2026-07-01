@@ -4,8 +4,7 @@ shellEmulator: true
 
 trustPolicy: no-downgrade
 
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
-onlyBuiltDependencies:
-  - lefthook
+allowBuilds:
+  esbuild: false
+  lefthook: true
+  sharp: false

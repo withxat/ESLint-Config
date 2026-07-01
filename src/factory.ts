@@ -87,6 +87,7 @@ export function xat(
 		markdown: enableMarkdown = true,
 		nextjs: enableNextjs = isPackageExists('next'),
 		paths: enablePaths = true,
+		perfectionist: enablePerfectionist = true,
 		pnpm: enablePnpm = !!findUpSync('pnpm-workspace.yaml'),
 		react: enableReact = isPackageExists('react'),
 		regexp: enableRegexp = true,
@@ -149,7 +150,6 @@ export function xat(
 		imports({
 			stylistic: stylisticOptions,
 		}),
-		perfectionist(),
 	)
 
 	if (enableUnicorn) {
@@ -158,6 +158,14 @@ export function xat(
 
 	if (enableJsx) {
 		configs.push(jsx())
+	}
+
+	if (enablePerfectionist) {
+		configs.push(
+			perfectionist({
+				overrides: getOverrides(options, 'perfectionist'),
+			}),
+		)
 	}
 
 	if (enableImports) {

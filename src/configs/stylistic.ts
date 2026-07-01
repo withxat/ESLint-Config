@@ -4,6 +4,7 @@ import { pluginAntfu } from '@/plugins'
 import { interopDefault } from '@/utils'
 
 export const StylisticConfigDefaults: StylisticConfig = {
+	braceStyle: 'stroustrup',
 	indent: 'tab',
 	jsx: true,
 	quotes: 'single',
@@ -16,6 +17,7 @@ export async function stylistic(
 	options: StylisticOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
 	const {
+		braceStyle,
 		indent,
 		jsx,
 		overrides = {},
@@ -29,6 +31,7 @@ export async function stylistic(
 	const pluginStylistic = await interopDefault(import('@stylistic/eslint-plugin'))
 
 	const config = pluginStylistic.configs.customize({
+		braceStyle,
 		indent,
 		jsx,
 		pluginName: 'style',
