@@ -1,7 +1,7 @@
 {
 	"name": "@withxat/eslint-config",
 	"type": "module",
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"packageManager": "pnpm@11.23.0+sha512.f00082e5b283a199b74e079da28d155c008fe232f44c8a06ea7ddfa014ecf719fc362f790ecc67b28106ddac2afb24c49a9a079159da560b2ce7d1e98efd11af",
 	"description": "🧃 Xat's ESLint config preset / Xat 自用强迫症 ESLint 配置",
 	"author": "Xat <i@xat.sh> (https://xat.sh)",
