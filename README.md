@@ -258,3 +258,10 @@ Just remember to use `xat` instead of `antfu`.
 [MIT](./LICENSE) License\
 &copy; 2019-2025 [Anthony Fu](https://github.com/antfu)\
 &copy; 2025-PRESENT [Xat](https://github.com/withxat)
+
+## Author
+
+**@withxat/eslint-config** is a fork of [antfu/eslint-config](https://github.com/antfu/eslint-config) by [Anthony Fu](https://github.com/antfu).<br>
+This fork is authored and maintained by [Xat](https://github.com/withxat) with help from contributors ([list](https://github.com/withxat/ESLint-Config/graphs/contributors)).
+
+> [Blog](https://xat.sh) · GitHub [@withxat](https://github.com/withxat) · Telegram [@withxat](https://t.me/withxat) · X [@withxat](https://x.com/withxat) · Email [i@xat.sh](mailto:i@xat.sh)
